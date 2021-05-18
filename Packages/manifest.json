@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": "2.2.5",
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
     "com.svermeulen.extenject": "https://github.com/starikcetin/Extenject.git#upm",
     "com.unity.2d.animation": "5.0.4",
     "com.unity.2d.pixel-perfect": "4.0.1",
@@ -45,8 +47,7 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0",
-    "com.cysharp.unitask": "2.2.5"
+    "com.unity.modules.xr": "1.0.0"
   },
   "scopedRegistries": [
     {
