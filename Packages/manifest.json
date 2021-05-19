@@ -58,5 +58,6 @@
         "com.openupm"
       ]
     }
-  ]
+  ],
+  "testables": ["com.svermeulen.extenject"]
 }
