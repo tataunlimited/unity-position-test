@@ -4,9 +4,9 @@ using TMPro;
 namespace Project.UI
 {
     [UsedImplicitly]
-    public sealed class ResultTextController
+    public sealed class PlayerInputPresenter
     {
-        public ResultTextController(TMP_Text text)
+        public PlayerInputPresenter(TMP_InputField field)
         {
         }
     }

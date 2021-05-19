@@ -4,9 +4,9 @@ using TMPro;
 namespace Project.UI
 {
     [UsedImplicitly]
-    public sealed class PlayerInputController
+    public sealed class CountdownPresenter
     {
-        public PlayerInputController(TMP_InputField field)
+        public CountdownPresenter(TMP_Text text)
         {
         }
     }
