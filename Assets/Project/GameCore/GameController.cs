@@ -10,12 +10,14 @@ namespace Project.GameCore
     {
         private readonly RpsModel _rpsModel;
         private readonly SignalBus _signalBus;
+        private readonly Settings _settings;
         private enum GameState{PlayerTurn, Busy}
         private GameState _state;
         
-        public GameController(RpsModel rpsModel, SignalBus signalBus)
+        public GameController(RpsModel rpsModel,Settings settings, SignalBus signalBus)
         {
             _rpsModel = rpsModel;
+            _settings = settings;
             _signalBus = signalBus;
             _state = GameState.PlayerTurn;
         }
@@ -33,11 +35,11 @@ namespace Project.GameCore
             _rpsModel.SetOpponentHand(opponentModel.Hand);
             
             //Start CountDown
-            await UniTask.Delay(TimeSpan.FromSeconds(3));
+            await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForSymbolUpdate));
             //Set Symbols
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForGameOver));
             //Display Results
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForRestart));
             Restart();
 
         }
@@ -62,6 +64,14 @@ namespace Project.GameCore
         public void Dispose()
         {
             
+        }
+
+        [Serializable]
+        public class Settings
+        {
+            public float waitForSymbolUpdate;
+            public float waitForGameOver;
+            public float waitForRestart;
         }
     }
 }
