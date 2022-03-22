@@ -31,7 +31,7 @@ namespace Project.GameCore
         private void BindSignals()
         {
             Container.BindSignal<PlayerSubmitSignal>()
-                .ToMethod<GameController>((gc, signal) => gc.ValidateState(signal.PlayerModel));
+                .ToMethod<GameController>((gc, signal) => gc.ValidateState(signal.PlayerModel)).FromResolve();
             Container.BindSignal<ReadyForCountDownSignal>()
                 .ToMethod<CountdownPresenter>((cp, signal) => cp.StartCountDown(signal.Seconds)).FromResolve();
             Container.BindSignal<PlayerSymbolReadySignal>()
