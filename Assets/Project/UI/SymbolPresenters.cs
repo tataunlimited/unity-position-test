@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Project.UI
 {
-    public abstract class SymbolPresenter
+    public abstract class SymbolPresenter: IResettable
     {
         private readonly Image _image;
         private readonly Symbols _symbols;
