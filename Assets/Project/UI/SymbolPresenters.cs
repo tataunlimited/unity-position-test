@@ -51,7 +51,7 @@ namespace Project.UI
     [UsedImplicitly]
     public sealed class PlayerSymbolPresenter : SymbolPresenter
     {
-        public PlayerSymbolPresenter(Image image) : base(image)
+        public PlayerSymbolPresenter(Image image, Symbols symbols) : base(image, symbols)
         {
         }
     }
@@ -59,7 +59,7 @@ namespace Project.UI
     [UsedImplicitly]
     public sealed class OpponentSymbolPresenter : SymbolPresenter
     {
-        public OpponentSymbolPresenter(Image image) : base(image)
+        public OpponentSymbolPresenter(Image image, Symbols symbols) : base(image, symbols)
         {
         }
     }
