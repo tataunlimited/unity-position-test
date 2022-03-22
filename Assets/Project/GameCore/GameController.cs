@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Project.Model;
+using Project.Signals;
 using Project.Utilities;
 using Zenject;
 
@@ -11,6 +12,8 @@ namespace Project.GameCore
         private readonly RpsModel _rpsModel;
         private readonly SignalBus _signalBus;
         private readonly Settings _settings;
+        private readonly ReadyForCountDownSignal _readyForCountDownSignal;
+        private readonly ResetGameSignal _resetGameSignal;
         private enum GameState{PlayerTurn, Busy}
         private GameState _state;
         
@@ -19,11 +22,13 @@ namespace Project.GameCore
             _rpsModel = rpsModel;
             _settings = settings;
             _signalBus = signalBus;
+            _readyForCountDownSignal = new ReadyForCountDownSignal {Seconds = _settings.waitForSymbolUpdate};
+            _resetGameSignal = new ResetGameSignal();
         }
         public void Initialize()
         {
             _state = GameState.PlayerTurn;
-
+            
         }
         public void ValidateState(PlayerModel playerModel)
         {
@@ -40,12 +45,13 @@ namespace Project.GameCore
             _rpsModel.SetPlayerHand(playerModel.Hand);
             var opponentModel = await CreateOpponentModel();
             _rpsModel.SetOpponentHand(opponentModel.Hand);
-            
-            //Start CountDown
+            _signalBus.Fire(_readyForCountDownSignal);
             await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForSymbolUpdate));
-            //Set Symbols
+            _signalBus.Fire(new PlayerSymbolReadySignal{Hand = playerModel.Hand});
+            _signalBus.Fire(new OpponentSymbolReadySignal{Hand = opponentModel.Hand});
             await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForGameOver));
-            //Display Results
+            var outCome = _rpsModel.DetermineWinner();
+            _signalBus.Fire(new GameOverSignal{Outcome = outCome});
             await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForRestart));
             Restart();
 
@@ -54,6 +60,7 @@ namespace Project.GameCore
         private void Restart()
         {
             _state = GameState.PlayerTurn;
+            _signalBus.Fire(_resetGameSignal);
         }
         private static async UniTask<PlayerModel> CreateOpponentModel()
         {
@@ -76,7 +83,7 @@ namespace Project.GameCore
         [Serializable]
         public class Settings
         {
-            public float waitForSymbolUpdate;
+            public int waitForSymbolUpdate;
             public float waitForGameOver;
             public float waitForRestart;
         }

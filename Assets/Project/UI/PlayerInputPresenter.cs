@@ -1,6 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Project.Model;
+using Project.Signals;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -12,14 +13,24 @@ namespace Project.UI
     public sealed class PlayerInputPresenter: IInitializable, IResettable
     {
         private readonly TMP_InputField _field;
-        public PlayerInputPresenter(TMP_InputField field)
+        private readonly SignalBus _signalBus;
+        public PlayerInputPresenter(TMP_InputField field, SignalBus signalBus)
         {
             _field = field;
+            _signalBus = signalBus;
         }
         public void Initialize()
         {
             var inputStream = Observable.EveryUpdate()
-                .Where(_ => Input.GetKeyDown(KeyCode.Return));
+                .Where(_ => Input.GetKeyDown(KeyCode.Return))
+                .Subscribe(xs => ValidateInput());
+        }
+
+        private void ValidateInput()
+        {
+            var playerModel = GetPlayerModel(_field.text);
+            if(playerModel!=null)
+                _signalBus.Fire(new PlayerSubmitSignal{PlayerModel = playerModel});
         }
         public PlayerModel GetPlayerModel(string text)
         {
