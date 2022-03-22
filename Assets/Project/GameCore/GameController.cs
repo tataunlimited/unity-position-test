@@ -19,12 +19,19 @@ namespace Project.GameCore
             _rpsModel = rpsModel;
             _settings = settings;
             _signalBus = signalBus;
-            _state = GameState.PlayerTurn;
         }
-        
         public void Initialize()
         {
+            _state = GameState.PlayerTurn;
+
         }
+        public void ValidateState(PlayerModel playerModel)
+        {
+            if(_state!= GameState.PlayerTurn || playerModel == null)
+                return;
+            UpdatePlaying(playerModel);
+        }
+        
         
         private async void UpdatePlaying(PlayerModel playerModel)
         {
@@ -73,5 +80,7 @@ namespace Project.GameCore
             public float waitForGameOver;
             public float waitForRestart;
         }
+
+        
     }
 }
