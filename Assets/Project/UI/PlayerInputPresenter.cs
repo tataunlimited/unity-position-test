@@ -21,9 +21,10 @@ namespace Project.UI
         }
         public void Initialize()
         {
-            var inputStream = Observable.EveryUpdate()
+            Observable.EveryUpdate()
                 .Where(_ => Input.GetKeyDown(KeyCode.Return))
                 .Subscribe(xs => ValidateInput());
+            Reset();
         }
 
         private void ValidateInput()
