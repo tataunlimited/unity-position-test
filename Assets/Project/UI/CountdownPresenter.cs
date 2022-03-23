@@ -17,14 +17,15 @@ namespace Project.UI
 
         public async void StartCountDown(int seconds)
         {
-            var remainingSeconds = seconds;
-
-            while (remainingSeconds>0)
+            seconds--;
+            while (seconds>=0)
             {
-                _text.text = remainingSeconds.ToString();
+                _text.text = seconds.ToString();
+                seconds--;
                 await UniTask.Delay(TimeSpan.FromSeconds(1));
-                remainingSeconds -= 1;
             }
+
+            Reset();
         }
 
         public void Reset()

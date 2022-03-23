@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSettings:
     settings:
-      waitForSymbolUpdate: 3
+      waitForSymbolUpdate: 4
       waitForGameOver: 0.5
       waitForRestart: 0.5
     symbols:
