@@ -22,8 +22,7 @@ namespace Project.GameCore
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<PlayerSubmitSignal>();
             Container.DeclareSignal<ReadyForCountDownSignal>();
-            Container.DeclareSignal<PlayerSymbolReadySignal>();
-            Container.DeclareSignal<OpponentSymbolReadySignal>();
+            Container.DeclareSignal<SymbolsReadySignal>();
             Container.DeclareSignal<GameOverSignal>();
             Container.DeclareSignal<ResetGameSignal>();
         }
@@ -32,16 +31,6 @@ namespace Project.GameCore
         {
             Container.BindSignal<PlayerSubmitSignal>()
                 .ToMethod<GameController>((gc, signal) => gc.ValidateState(signal.PlayerModel)).FromResolve();
-            Container.BindSignal<ReadyForCountDownSignal>()
-                .ToMethod<CountdownPresenter>((cp, signal) => cp.StartCountDown(signal.Seconds)).FromResolve();
-            Container.BindSignal<PlayerSymbolReadySignal>()
-                .ToMethod<PlayerSymbolPresenter>((ps, signal) => { ps.SetSymbol(signal.Hand); }).FromResolve();
-            Container.BindSignal<OpponentSymbolReadySignal>()
-                .ToMethod<OpponentSymbolPresenter>((os, signal) => { os.SetSymbol(signal.Hand); }).FromResolve();
-            Container.BindSignal<GameOverSignal>()
-                .ToMethod<ResultTextPresenter>((rt, signal) => { rt.ShowResults(signal.Outcome); }).FromResolve();
-            Container.BindSignal<ResetGameSignal>().ToMethod<IResettable>(x => x.Reset).FromResolveAll();
-
         }
     }
 }

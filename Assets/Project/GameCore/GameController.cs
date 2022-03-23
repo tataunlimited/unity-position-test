@@ -47,8 +47,7 @@ namespace Project.GameCore
             _rpsModel.SetOpponentHand(opponentModel.Hand);
             _signalBus.Fire(_readyForCountDownSignal);
             await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForSymbolUpdate));
-            _signalBus.Fire(new PlayerSymbolReadySignal{Hand = playerModel.Hand});
-            _signalBus.Fire(new OpponentSymbolReadySignal{Hand = opponentModel.Hand});
+            _signalBus.Fire(new SymbolsReadySignal{PlayerHand = playerModel.Hand, OpponentHand = opponentModel.Hand});
             await UniTask.Delay(TimeSpan.FromSeconds(_settings.waitForGameOver));
             var outCome = _rpsModel.DetermineWinner();
             _signalBus.Fire(new GameOverSignal{Outcome = outCome});

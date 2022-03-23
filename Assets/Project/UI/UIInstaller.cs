@@ -17,6 +17,8 @@ namespace Project.UI
         
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<PresenterService>().AsSingle().NonLazy();
+
             Container.BindInterfacesAndSelfTo<PlayerInputPresenter>().AsSingle().WithArguments(playerInput).NonLazy();
             
             Container.BindInterfacesAndSelfTo<PlayerSymbolPresenter>().AsSingle().WithArguments(playerSymbol).NonLazy();

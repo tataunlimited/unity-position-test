@@ -11,14 +11,10 @@ namespace Project.Signals
         public Outcome Outcome;
     }
 
-    public struct PlayerSymbolReadySignal
+    public struct SymbolsReadySignal
     {
-        public Hand Hand;
-    }
-    
-    public struct OpponentSymbolReadySignal
-    {
-        public Hand Hand;
+        public Hand PlayerHand;
+        public Hand OpponentHand;
     }
 
     public struct ResetGameSignal
