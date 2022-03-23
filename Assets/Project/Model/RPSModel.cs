@@ -1,10 +1,9 @@
 using JetBrains.Annotations;
-using UnityEngine;
 
 namespace Project.Model
 {
     [UsedImplicitly]
-    public class RpsModel
+    public class RPSModel
     {
         private Hand _playerHand;
         private Hand _opponentHand;
@@ -21,18 +20,18 @@ namespace Project.Model
 
         public Outcome DetermineWinner()
         {
-            Debug.Log(_playerHand + " vs "+_opponentHand );
             switch (_playerHand)
             {
                 case Hand.Paper when _opponentHand == Hand.Rock:
                 case Hand.Rock when _opponentHand  == Hand.Scissors:
                 case Hand.Scissors when _opponentHand  == Hand.Paper:
                     return Outcome.Win;
+                
                 case Hand.Paper when _opponentHand == Hand.Scissors:
                 case Hand.Scissors when _opponentHand == Hand.Rock:
                 case Hand.Rock when _opponentHand == Hand.Paper:
                     return Outcome.Lose;
-
+                
                 default:
                     return Outcome.Tie;
             }

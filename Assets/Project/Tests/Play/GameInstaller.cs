@@ -7,7 +7,7 @@ namespace Project.Tests.Play
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<RpsModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<RPSModel>().AsSingle().NonLazy();
         }
     }
 }

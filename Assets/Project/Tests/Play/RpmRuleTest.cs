@@ -6,7 +6,7 @@ namespace Project.Tests.Play
 {
     internal sealed class  RpmRuleTest : ZenjectIntegrationTestFixture
     {
-        [Inject] private RpsModel _rpsModel;
+        [Inject] private RPSModel _rpsModel;
         
         [SetUp]
         public void CommonInstall()

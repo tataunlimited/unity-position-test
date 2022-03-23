@@ -9,7 +9,7 @@ namespace Project.GameCore
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<RpsModel>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<RPSModel>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<GameController>().AsSingle().NonLazy();
             InstallSignals();
             BindSignals();

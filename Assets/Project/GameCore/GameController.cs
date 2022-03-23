@@ -9,7 +9,7 @@ namespace Project.GameCore
 {
     public class GameController : IInitializable, IDisposable
     {
-        private readonly RpsModel _rpsModel;
+        private readonly RPSModel _rpsModel;
         private readonly SignalBus _signalBus;
         private readonly Settings _settings;
         private readonly ReadyForCountDownSignal _readyForCountDownSignal;
@@ -17,7 +17,7 @@ namespace Project.GameCore
         private enum GameState{PlayerTurn, Busy}
         private GameState _state;
         
-        public GameController(RpsModel rpsModel,Settings settings, SignalBus signalBus)
+        public GameController(RPSModel rpsModel,Settings settings, SignalBus signalBus)
         {
             _rpsModel = rpsModel;
             _settings = settings;
