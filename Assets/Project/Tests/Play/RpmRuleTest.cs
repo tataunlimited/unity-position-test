@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Project.Tests.Play
 {
-    internal sealed class  RpmRuleTest : ZenjectIntegrationTestFixture
+    internal sealed class  RPMRuleTest : ZenjectIntegrationTestFixture
     {
         [Inject] private RPSModel _rpsModel;
         

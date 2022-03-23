@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using Project.Model;
 using Project.Signals;
 using Project.Utilities;
@@ -7,6 +8,7 @@ using Zenject;
 
 namespace Project.GameCore
 {
+    [UsedImplicitly]
     public class GameController : IInitializable, IDisposable
     {
         private readonly RPSModel _rpsModel;
